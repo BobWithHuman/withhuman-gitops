@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: withhuman-prod
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/BobWithHuman/withhuman-core.git
+      # Pin to the commit of envs/prod/values.yaml's imageTag when promoting.
+      targetRevision: main
+      path: deploy/k8s/withhuman
+      helm:
+        releaseName: withhuman
+        valueFiles:
+          - $values/envs/prod/values.yaml
+    - repoURL: git@github.com:BobWithHuman/withhuman-gitops.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: withhuman-prod
+  # No automated sync: a person syncs production after reviewing the diff.

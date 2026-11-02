@@ -1,0 +1,19 @@
+# Set by the Service Images workflow of withhuman-core.
+imageTag: a150dd52d752e8e592ac7c4e14c54159d742e2c6
+
+# Fill in when the staging environment exists.
+neo4j:
+  httpUrl: ""
+  boltUrl: ""
+
+collector:
+  mode: shadow
+
+ingress:
+  enabled: true
+  className: alb
+  host: ""
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'

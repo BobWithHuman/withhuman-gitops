@@ -1,0 +1,20 @@
+# Promote by copying a tag that passed staging.
+imageTag: ""
+
+# Fill in when the production environment exists.
+neo4j:
+  httpUrl: ""
+  boltUrl: ""
+
+# Move to `enforce` once shadow results and a sustained load test pass.
+collector:
+  mode: shadow
+
+ingress:
+  enabled: true
+  className: alb
+  host: ""
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
