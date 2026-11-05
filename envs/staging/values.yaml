@@ -9,11 +9,20 @@ neo4j:
 collector:
   mode: shadow
 
+externalSecret:
+  enabled: true
+  data:
+    - secretKey: neo4j-password
+      remoteRef: { key: withhuman-staging/engine, property: neo4j-password }
+    - secretKey: redis-url
+      remoteRef: { key: withhuman-staging/engine, property: redis-url }
+    - secretKey: jev-api-key
+      remoteRef: { key: withhuman-staging/jev-api-key }
+
 ingress:
   enabled: true
-  className: alb
+  className: traefik
   host: ""
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    cert-manager.io/cluster-issuer: letsencrypt
+  tlsSecretName: withhuman-tls

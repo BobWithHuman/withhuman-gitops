@@ -21,3 +21,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: withhuman-prod
   # No automated sync: a person syncs production after reviewing the diff.
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
