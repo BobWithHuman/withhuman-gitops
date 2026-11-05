@@ -1,5 +1,5 @@
 # Set by the Service Images workflow of withhuman-core.
-imageTag: 8a90acf84f079ebcf89fa5690996e476ac55cebe
+imageTag: ae687dd659a92969c121c61d094366ca3729124d
 
 # Fill in when the staging environment exists.
 neo4j:
