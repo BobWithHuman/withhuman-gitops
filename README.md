@@ -21,18 +21,9 @@ Roll back by reverting the commit that set the tag.
 
 ## Setting up Argo CD
 
-1. Register this repository with a read-only deploy key:
+Terraform in withhuman-core (`infra/`) installs Argo CD and applies the cluster's Application from
+`apps/`, so nothing here is applied by hand. This repository is public, and Argo CD reads it over
+https without credentials.
 
-   ```sh
-   kubectl -n argocd create secret generic withhuman-gitops \
-     --from-literal=type=git \
-     --from-literal=url=git@github.com:BobWithHuman/withhuman-gitops.git \
-     --from-file=sshPrivateKey=argocd-gitops
-   kubectl -n argocd label secret withhuman-gitops argocd.argoproj.io/secret-type=repository
-   ```
-
-2. Fill in the environment's values, then apply its Application:
-
-   ```sh
-   kubectl apply -f apps/staging.yaml
-   ```
+Before a first sync, fill in the environment's `neo4j` URLs and `ingress.host` from the Terraform
+outputs.
