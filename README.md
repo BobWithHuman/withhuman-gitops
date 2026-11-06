@@ -1,7 +1,10 @@
 # withhuman-gitops
 
-What each WithHuman environment runs. Argo CD installs the chart from
+What WithHuman-operated staging and production run. Argo CD installs the chart from
 [withhuman-core](https://github.com/BobWithHuman/withhuman-core) with the values here.
+
+Enterprise self-hosted installations use an enterprise-owned GitOps repository or their existing
+delivery system; they do not follow this repository automatically.
 
 ```text
 apps/           Argo CD Applications
@@ -12,8 +15,8 @@ No secret belongs here. Each namespace needs the `withhuman` Secret described in
 
 ## Deploying
 
-- **staging** follows `main` of withhuman-core: the Service Images workflow commits each new
-  `imageTag`, and Argo CD rolls it out.
+- **staging** follows successful `main` builds of withhuman-core: the Service Images workflow moves
+  both `imageTag` and the chart `targetRevision` to the same commit SHA, and Argo CD rolls it out.
 - **prod** changes by pull request: copy a tag that passed staging into `envs/prod/values.yaml`, then
   sync `withhuman-prod` in Argo CD after reviewing the diff.
 

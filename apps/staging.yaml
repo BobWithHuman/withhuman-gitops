@@ -7,7 +7,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/BobWithHuman/withhuman-core.git
-      targetRevision: main
+      targetRevision: 3fb8245513c49a63ca4827b6e061c753e5fe2606
       path: deploy/k8s/withhuman
       helm:
         releaseName: withhuman
