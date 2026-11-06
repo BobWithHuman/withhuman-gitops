@@ -1,10 +1,5 @@
 # Set by the Service Images workflow of withhuman-core.
-imageTag: 6bdb20fae7e3d1219011bc15d73ec11491c88818
-
-# Fill in when the staging environment exists.
-neo4j:
-  httpUrl: ""
-  boltUrl: ""
+imageTag: 47d9ef37531016b7582dde0ab6084b0bd4564710
 
 collector:
   mode: shadow
@@ -12,15 +7,17 @@ collector:
 externalSecret:
   enabled: true
   data:
-    - secretKey: neo4j-password
-      remoteRef: { key: withhuman-staging/engine, property: neo4j-password }
+    - secretKey: database-url
+      remoteRef: { key: withhuman-staging/database-url }
     - secretKey: redis-url
       remoteRef: { key: withhuman-staging/engine, property: redis-url }
     - secretKey: jev-api-key
       remoteRef: { key: withhuman-staging/jev-api-key }
 
+# Off until this environment has a domain: `host` is required once enabled, and cert-manager issues
+# the certificate for that name. Reach the gateway with `kubectl port-forward` meanwhile.
 ingress:
-  enabled: true
+  enabled: false
   className: traefik
   host: ""
   annotations:

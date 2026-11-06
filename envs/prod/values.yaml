@@ -1,11 +1,6 @@
 # Promote by copying a tag that passed staging.
 imageTag: ""
 
-# Fill in when the production environment exists.
-neo4j:
-  httpUrl: ""
-  boltUrl: ""
-
 # Move to `enforce` once shadow results and a sustained load test pass.
 collector:
   mode: shadow
@@ -13,15 +8,17 @@ collector:
 externalSecret:
   enabled: true
   data:
-    - secretKey: neo4j-password
-      remoteRef: { key: withhuman-prod/engine, property: neo4j-password }
+    - secretKey: database-url
+      remoteRef: { key: withhuman-prod/database-url }
     - secretKey: redis-url
       remoteRef: { key: withhuman-prod/engine, property: redis-url }
     - secretKey: jev-api-key
       remoteRef: { key: withhuman-prod/jev-api-key }
 
+# Off until this environment has a domain: `host` is required once enabled, and cert-manager issues
+# the certificate for that name.
 ingress:
-  enabled: true
+  enabled: false
   className: traefik
   host: ""
   annotations:
