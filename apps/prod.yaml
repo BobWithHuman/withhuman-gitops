@@ -14,7 +14,7 @@ spec:
         releaseName: withhuman
         valueFiles:
           - $values/envs/prod/values.yaml
-    - repoURL: git@github.com:BobWithHuman/withhuman-gitops.git
+    - repoURL: https://github.com/BobWithHuman/withhuman-gitops.git
       targetRevision: main
       ref: values
   destination:
